@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pt.share.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.pt.share.entity.User">
+        <!--@mbg.generated generated on Mon Feb 17 21:01:26 CST 2020.-->
+        <!--@Table tb_user-->
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="email" property="email" />
+        <result column="status" property="status" />
+        <result column="phone" property="phone" />
+        <result column="wx_openid" property="wxOpenid" />
+        <result column="deleted" property="deleted" />
+    </resultMap>
+
+    <!--登陆时创建rbac角色-->
+    <resultMap id="UserRoleMap" extends="BaseResultMap" type="com.pt.share.entity.User">
+        <collection property="roles" ofType="com.pt.share.entity.Role" column="id" select="com.pt.share.mapper.RoleMapper.selectByUid"/>
+    </resultMap>
+
+
+
+    <sql id="Base_Column_List">
+        <!--@mbg.generated generated on Thu Feb 20 19:27:41 CST 2020.-->
+        id, username, password, email,status,wx_openid,phone,deleted
+    </sql>
+    <select id="selectOneByUid" resultMap="UserRoleMap">
+        select <include refid="Base_Column_List"></include>
+        from user where id=#{uid}
+    </select>
+    <select id="selectByUsername" resultMap="UserRoleMap">
+        select <include refid="Base_Column_List"></include>
+        from user where username=#{username}
+    </select>
+
+
+
+</mapper>

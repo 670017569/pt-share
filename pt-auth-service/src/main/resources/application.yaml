@@ -1,0 +1,40 @@
+server:
+  port: 8080
+#  应用数据源及数据库连接信息配置
+spring:
+  application:
+    name: pt-auth-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/pt_share?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: bmy123!@#
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    host: localhost
+    port: 6379
+    password:
+    database: 1
+    timeout: 5000
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+# 日志打印配置
+logging:
+  level:
+    root:  INFO
+    org.springframework:  ERROR
+    org.mybatis:  INFO
+
+#微信小程序配置信息
+wx:
+  mp:
+    app_id: wx709ec57613620a10
+    app_secret: 71e19f5a0805e1a7d41e6bdb40012358
+    api: https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code

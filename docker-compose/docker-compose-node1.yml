@@ -1,0 +1,34 @@
+version: '3.3'
+services:
+  area-server:
+    container_name: area-server
+    environment:
+#      'spring.cloud.nacos.discovery.server-addr': 'http://node1.bmy8.xyz:8848'
+      TZ: Asia/Shanghai
+    ports:
+      - '8087:8087'
+    build:
+      context: ../area-server
+      dockerfile: Dockerfile
+
+  oauth2-gateway-server:
+    container_name: oauth2-gateway-server
+    environment:
+#      'spring.cloud.nacos.discovery.server-addr': "http://node1.bmy8.xyz:8848"
+      TZ: Asia/Shanghai
+    ports:
+      - '8080:8080'
+    build:
+      context: ../oauth2-gateway-server
+      dockerfile: Dockerfile
+
+  auth-oauth2-server:
+    container_name: auth-oauth2-server
+    environment:
+#      'spring.cloud.nacos.discovery.server-addr': 'http://node1.bmy8.xyz:8848'
+      TZ: Asia/Shanghai
+    ports:
+      - '8081:8081'
+    build:
+      context: ../auth-oauth2-server
+      dockerfile: Dockerfile

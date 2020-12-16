@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pt.share.mapper.PermissionMapper">
+
+    <resultMap id="BaseResultMap" type="com.pt.share.entity.Permission">
+        <!--@mbg.generated generated on Mon Feb 17 21:01:26 CST 2020.-->
+        <!--@Table tb_role-->
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="url" property="url" />
+        <result column="description" property="description" />
+        <result column="created" property="created" />
+        <result column="updated" property="updated" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        <!--@mbg.generated generated on Mon Feb 17 21:01:26 CST 2020.-->
+        id,name,description,created,updated,url
+    </sql>
+
+    <select id="selectPermissionByRoleId" resultType="com.pt.share.entity.Permission">
+    select *
+    from role_permission
+    left join permission
+    on permission.id = role_permission.pid
+    where rid = #{rid}
+    </select>
+
+</mapper>
